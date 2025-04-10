@@ -1,0 +1,55 @@
+<template>
+    <!-- <div class="exampleHolder" if:true={spinner}>
+        <lightning-spinner size="large"></lightning-spinner>
+   </div>
+    <lightning-card  title="Opportunities">
+        <div style="height: 300px;">
+            <lightning-datatable
+                    key-field="idOpp"
+                    data={opportunities}
+                    columns={columns}
+                    onrowaction={handleRowAction}>
+            </lightning-datatable>
+        </div>
+        
+    </lightning-card> -->
+
+    <article class="slds-card">
+        <div class="slds-card__header slds-grid">
+          <header class="slds-media slds-media_center slds-has-flexi-truncate">
+            <div class="slds-media__figure">
+              <span class="slds-icon_container slds-icon-standard-opportunity" title="Opportunities">
+                <svg class="slds-icon slds-icon_small" aria-hidden="true">
+                  <use xlink:href="/_slds/icons/standard-sprite/svg/symbols.svg#opportunity"></use>
+                </svg>
+                <span class="slds-assistive-text">opportunity</span>
+              </span>
+            </div>
+            <div class="slds-media__body">
+              <h2 class="slds-card__header-title">
+                <a href="javascript:void(0);" class="slds-card__header-link slds-truncate" title="My Opportunities ({count})">
+                  <span>My Opportunities ({count})</span>
+                </a>
+              </h2>
+            </div>
+            <div class="slds-no-flex">
+              <!-- <button class="slds-button slds-button_neutral">Refresh</button> -->
+              <lightning-button label="Refresh" title="Non-primary action" onclick={loadOpportunities} class="slds-m-left_x-small"></lightning-button>
+            </div>
+          </header>
+        </div>
+        <div class="slds-card__body">
+            <lightning-datatable
+                    key-field="idOpp"
+                    data={opportunities}
+                    columns={columns}
+                    onrowaction={handleRowAction}
+                    class="slds-table slds-table_cell-buffer slds-no-row-hover slds-table_bordered slds-table_fixed-layout" role="grid"
+                    hide-checkbox-column>
+            </lightning-datatable>
+        </div>
+        <footer class="slds-card__footer">
+          
+        </footer>
+      </article>
+</template>
