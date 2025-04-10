@@ -3,19 +3,24 @@ global without sharing class getLeads {
     @HttpGet
     global static leadsResponse getLeads() {
         leadsResponse resp = new leadsResponse();
-        string email = RestContext.request.params.get('email');
-        
-        if(email!=null){
-            list<Lead> leads = [SELECT Id, Name, FirstName,LastName, Email FROM Lead where Email =:email];
-            if(!leads.isEmpty()){
-                resp.resultLeads = leads;
+        try{
+            string email = RestContext.request.params.get('email');
+            if(email!=null){
+                list<Lead> leads = [SELECT Id, Name, FirstName,LastName, Email FROM Lead where Email =:email];
+                if(!leads.isEmpty()){
+                    resp.resultLeads = leads;
+                }else{
+                    resp.error=true;
+                    resp.errorMessage='No records found';
+                }
             }else{
                 resp.error=true;
-                resp.errorMessage='No records found';
+                resp.errorMessage = 'You must provide an email to search for';
             }
-        }else{
+        }catch(Exception e){
             resp.error=true;
-            resp.errorMessage = 'You must provide an email to search for';
+            resp.errorMessage = 'There has been an error, please try again in a few minutes.';
+            system.debug(e.getMessage()+' at line '+e.getLineNumber()+' '+e.getStackTraceString());
         }
         
         return resp;
